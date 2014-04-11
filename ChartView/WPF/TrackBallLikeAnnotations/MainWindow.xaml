@@ -41,7 +41,12 @@
             </StackPanel>
         </Border>
 
-        <telerik:RadCartesianChart Grid.Row="1" local:ChartUtilities.AnnotationsGroup="g1">
+        <telerik:RadCartesianChart Grid.Row="1" local:ChartUtilities.AnnotationsGroup="g1"
+                                   HorizontalZoomRangeStart="{Binding SelectionStart, Mode=TwoWay}"
+                                   HorizontalZoomRangeEnd="{Binding SelectionEnd, Mode=TwoWay}">
+            <telerik:RadCartesianChart.Behaviors>
+                <telerik:ChartPanAndZoomBehavior ZoomMode="Horizontal" DragMode="Pan" />
+            </telerik:RadCartesianChart.Behaviors>
             <telerik:RadCartesianChart.HorizontalAxis>
                 <telerik:DateTimeCategoricalAxis LabelFormat="MMMdd" />
             </telerik:RadCartesianChart.HorizontalAxis>
@@ -63,7 +68,12 @@
         </telerik:RadCartesianChart>
 
         <telerik:RadCartesianChart Grid.Row="2"
-                                   local:ChartUtilities.AnnotationsGroup="g1">
+                                   local:ChartUtilities.AnnotationsGroup="g1"
+                                   HorizontalZoomRangeStart="{Binding SelectionStart, Mode=TwoWay}"
+                                   HorizontalZoomRangeEnd="{Binding SelectionEnd, Mode=TwoWay}">
+            <telerik:RadCartesianChart.Behaviors>
+                <telerik:ChartPanAndZoomBehavior ZoomMode="Horizontal" DragMode="Pan" />
+            </telerik:RadCartesianChart.Behaviors>
             <telerik:RadCartesianChart.HorizontalAxis>
                 <telerik:DateTimeCategoricalAxis LabelFormat="MMMdd" />
             </telerik:RadCartesianChart.HorizontalAxis>

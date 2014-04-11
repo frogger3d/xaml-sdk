@@ -112,25 +112,38 @@ namespace TrackBallLikeAnnotations
             object currentXCategory = GetCurrentXCategory(chart);
 
             Point position = e.GetPosition(chart);
-            if (!chart.PlotAreaClip.Contains(position.X, position.Y))
-            {
-                if (HidesAnnotationsOnMouseLeave && currentXCategory != null)
-                {
-                    HideAnnotations(group);
-                }
 
+            DataTuple tuple = null;
+            try
+            {
+                tuple = chart.ConvertPointToData(position);
+            }
+            catch (NullReferenceException)
+            {
+                // happens during load sometimes
                 return;
             }
 
-            DataTuple tuple = chart.ConvertPointToData(position);
-            object xCategory = tuple.FirstValue;
+            if (tuple == null)
+            {
+                if (!chart.PlotAreaClip.Contains(position.X, position.Y))
+                {
+                    if (HidesAnnotationsOnMouseLeave && currentXCategory != null)
+                    {
+                        HideAnnotations(group);
+                    }
 
+                    return;
+                }
+            }
+
+            object xCategory = tuple.FirstValue;
             if (object.Equals(xCategory, currentXCategory))
             {
                 return;
             }
 
-            UpdateCharts(group, xCategory);            
+            UpdateCharts(group, xCategory);
         }
 
         private static void HideAnnotations(string group)
